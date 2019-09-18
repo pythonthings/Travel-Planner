@@ -103,3 +103,5 @@ env37/
 
 # mypy
 .mypy_cache/
+
+conf.ini

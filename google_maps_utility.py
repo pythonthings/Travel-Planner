@@ -1,8 +1,3 @@
-##
-# API KEY AIzaSyAY1aatbdVCglJhXI0HFddm5pEkPTUpBFU
-#python3.6
-# importing required libraries
-import sys 
 
 """
 using Google Maps API to get directions from \
@@ -13,12 +8,20 @@ using Google Maps API to get directions from \
 - - to grab time in hours and minutes from start to end point
 
 """
-import requests, json
+import requests, json, sys
+from configparser import ConfigParser
+
+
+PARSER = ConfigParser()
+PARSER.read('conf.ini')
+
+API_KEY = PARSER.get('google_credentials','google_key')
 
 
 class GoogleMapsUtility():
     def __init__(self):
-        self.api_key = 'AIzaSyAlFOfYJqGZR3a_5VcbrihyaproXXWTeY4'
+
+        self.api_key = API_KEY
 
     def directionsRequest(self, start_point, end_point):
         try:
@@ -48,6 +51,6 @@ class GoogleMapsUtility():
                 print(response.status_code)
                 print(response.json())
                 return response.status_code
-        
+
         except:
             sys.exit("Something went wrong! Try again.")
